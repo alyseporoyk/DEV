@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" revision="1.0" schemaVersion="1.0" xmlns="http://www.microsoft.com/GroupPolicy/PolicyDefinitions">
+  <displayName>Windows PowerShell</displayName>
+  <description>此文件包含 Windows PowerShell 配置选项‏‎</description>
+  <resources>
+    <stringTable>
+      <string id="AllScripts">允许所有脚本</string>
+      <string id="AllScriptsSigned">只允许签名脚本</string>
+      <string id="EnableScripts">启用脚本执行</string>
+      <string id="EnableScripts_Explain">通过使用此策略设置，你可以配置脚本执行策略以控制允许运行哪些脚本。
+
+如果启用此策略设置，则允许运行在下拉列表中选择的脚本。
+
+“只允许签名脚本”策略设置只允许执行受信任的发布者签名的脚本。
+
+“允许本地脚本和远程签名脚本”策略设置允许运行任何本地脚本；来自 Internet 的脚本必须由受信任的发布者进行签名。
+
+“允许所有脚本”策略设置允许运行所有脚本。
+
+如果禁用此策略设置，则不允许运行任何脚本。
+
+注意: 此策略设置位于本地组策略编辑器中的“计算机配置”和“用户配置”下面。“计算机配置”优先于“用户配置”。
+
+如果禁用或未配置此策略设置，则将设置恢复为每台计算机的首选项设置；如果未配置，则默认设置为“不允许任何脚本”。</string>
+      <string id="PowerShell">Windows PowerShell</string>
+      <string id="RemoteSignedScripts">允许本地脚本和远程签名脚本</string>
+      <string id="SUPPORTED_WIN7">Microsoft Windows 7 或 Windows Server 2008 家族及以上版本</string>
+       
+      <string id="EnableModuleLogging">启用模块日志记录</string>
+      <string id="EnableModuleLogging_Explain">
+        This policy setting allows you to turn on logging for Windows PowerShell modules.
+
+        If you enable this policy setting, pipeline execution events for members of the specified modules are recorded in the Windows PowerShell log in Event Viewer. Enabling this policy setting for a module is equivalent to setting the LogPipelineExecutionDetails property of the module to True.
+
+        If you disable this policy setting, logging of execution events is disabled for all Windows PowerShell modules. Disabling this policy setting for a module is equivalent to setting the LogPipelineExecutionDetails property of the module to False.
+
+        If this policy setting is not configured, the LogPipelineExecutionDetails property of a module or snap-in determines whether the execution events of a module or snap-in are logged. By default, the LogPipelineExecutionDetails property of all modules and snap-ins is set to False.
+
+        To add modules and snap-ins to the policy setting list, click Show, and then type the module names in the list. The modules and snap-ins in the list must be installed on the computer.
+
+        Note: This policy setting exists under both Computer Configuration and User Configuration in the Group Policy Editor. The Computer Configuration policy setting takes precedence over the User Configuration policy setting.
+      </string>
+
+      <string id="EnableTranscripting">Turn on PowerShell Transcription</string>
+      <string id="EnableTranscripting_Explain">
+        This policy setting lets you capture the input and output of Windows PowerShell commands into text-based transcripts.
+
+        If you enable this policy setting, Windows PowerShell will enable transcripting for Windows PowerShell, the Windows PowerShell ISE, and any other
+        applications that leverage the Windows PowerShell engine. By default, Windows PowerShell will record transcript output to each users' My Documents
+        directory, with a file name that includes 'PowerShell_transcript', along with the computer name and time started. Enabling this policy is equivalent
+        to calling the Start-Transcript cmdlet on each Windows PowerShell session.
+
+        If you disable this policy setting, transcripting of PowerShell-based applications is disabled by default, although transcripting can still be enabled
+        through the Start-Transcript cmdlet.
+        
+        If you use the OutputDirectory setting to enable transcript logging to a shared location, be sure to limit access to that directory to prevent users
+        from viewing the transcripts of other users or computers.
+
+        Note: This policy setting exists under both Computer Configuration and User Configuration in the Group Policy Editor. The Computer Configuration policy setting takes precedence over the User Configuration policy setting.
+      </string>
+
+      <string id="EnableScriptBlockLogging">Turn on PowerShell Script Block Logging</string>
+      <string id="EnableScriptBlockLogging_Explain">
+        This policy setting enables logging of all PowerShell script input to the Microsoft-Windows-PowerShell/Operational event log. If you enable this policy setting,
+        Windows PowerShell will log the processing of commands, script blocks, functions, and scripts - whether invoked interactively, or through automation.
+        
+        If you disable this policy setting, logging of PowerShell script input is disabled.
+        
+        If you enable the Script Block Invocation Logging, PowerShell additionally logs events when invocation of a command, script block, function, or script
+        starts or stops. Enabling Invocation Logging generates a high volume of event logs.
+        
+        Note: This policy setting exists under both Computer Configuration and User Configuration in the Group Policy Editor. The Computer Configuration policy setting takes precedence over the User Configuration policy setting.
+      </string>
+      
+      <string id="EnableUpdateHelpDefaultSourcePath">设置 Update-Help 的默认源路径</string>
+      <string id="EnableUpdateHelpDefaultSourcePath_Explain">This policy setting allows you to set the default value of the SourcePath parameter on the Update-Help cmdlet.
+
+If you enable this policy setting, the Update-Help cmdlet will use the specified value as the default value for the SourcePath parameter. This default value can be overridden by specifying a different value with the SourcePath parameter on the Update-Help cmdlet.
+
+If this policy setting is disabled or not configured, this policy setting does not set a default value for the SourcePath parameter of the Update-Help cmdlet.
+
+Note: This policy setting exists under both Computer Configuration and User Configuration in the Group Policy Editor. The Computer Configuration policy setting takes precedence over the User Configuration policy setting.
+      </string>
+      <!--<string id="PowerShell">Windows PowerShell</string>-->
+    </stringTable>
+    <presentationTable>
+      <presentation id="EnableScripts">
+        <dropdownList refId="ExecutionPolicy" noSort="true">执行策略</dropdownList>
+      </presentation>
+      <presentation id="EnableModuleLogging">
+        <text>要为一个或多个模块启用日志记录，请单击“显示”，然后在列表中键入模块名称。支持使用通配符。</text>
+        <listBox refId="Listbox_ModuleNames" required="false">Module Names</listBox>
+        <text>要为 Windows PowerShell 核心模块启用日志记录，请在列表中键入以下模块名称:</text>
+        <text>Microsoft.PowerShell.*</text>
+        <text>Microsoft.WSMan.Management</text>
+      </presentation>
+      <presentation id="EnableTranscripting">
+        <textBox refId="OutputDirectory"><label>Transcript output directory</label></textBox>
+        <checkBox refId="EnableInvocationHeader">Include invocation headers:</checkBox>
+      </presentation>     
+      <presentation id="EnableScriptBlockLogging">
+        <checkBox refId="EnableScriptBlockInvocationLogging">Log script block invocation start / stop events:</checkBox>
+      </presentation>           
+      <presentation id="EnableUpdateHelpDefaultSourcePath">
+        <textBox refId="SourcePathForUpdateHelp">
+          <label>Default Source Path</label>
+        </textBox>
+      </presentation>
+    </presentationTable>    
+  </resources>
+
+</policyDefinitionResources>
